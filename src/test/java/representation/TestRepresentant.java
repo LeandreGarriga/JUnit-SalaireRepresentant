@@ -82,6 +82,17 @@ public class TestRepresentant {
 		}
 
 	}
-	
+        
+        @Test
+        public void testEnregistrerCaMois(){
+            try{    
+                // On enregistre un mois inéxistant dans notre programme
+                r.enregistrerCA(12, FIXE_BASTIDE);
+                fail("un mois au-dessus de 11 doit générer une exception");
+            }catch (IllegalArgumentException e){
+                        
+            }
+            
+        }
 	
 }

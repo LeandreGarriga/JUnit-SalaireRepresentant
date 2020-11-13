@@ -1,4 +1,5 @@
 package representation;
+import java.util.HashMap; //import la classe java Hashmap
 
 public class Representant {
 
@@ -7,11 +8,16 @@ public class Representant {
 	private final String prenom;
 	private String adresse;
 	private float salaireFixe;
+        private ZoneGeographique secteur;
+        private ZoneGeographique indemniteRepas;
+        private HashMap<Integer, String> CA = new HashMap<>();
+        
 
 	public Representant(int numero, String nom, String prenom, ZoneGeographique secteur) {
 		this.numero = numero;
 		this.nom = nom;
 		this.prenom = prenom;
+                
 	}
 
 	public int getNumero() {
@@ -44,12 +50,14 @@ public class Representant {
 
 	public ZoneGeographique getSecteur() {
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+                return secteur;
+		
 	}
 
 	public void setSecteur(ZoneGeographique secteur) {
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+                this.secteur= secteur;
+		
 	}
 
 	/**
@@ -66,7 +74,8 @@ public class Representant {
 			throw new IllegalArgumentException("Le montant doit être positif ou null");
 		}
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+                
+                CA.put(mois, ""+montant);
 	}
 
 	/**
@@ -77,7 +86,16 @@ public class Representant {
 	 */
 	public float salaireMensuel(int mois, float pourcentage) {
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+                if (mois < 0 || mois > 11) {
+			throw new IllegalArgumentException("Le mois doit être compris entre 0 et 11");
+		}
+		if (pourcentage < 0 || pourcentage > 1) {
+			throw new IllegalArgumentException("Le pourcentage doit être compris entre 0 et 1");
+		}
+                float montants = Float.parseFloat(CA.get(mois));
+                float indemnite = 200f;
+                float SalaireM = salaireFixe+(montants*pourcentage)+indemnite;    //Implementation indemniteRepas manquante en récupérant la donnée de ZoneGeographique
+		return SalaireM;
 	}
 
 	@Override
